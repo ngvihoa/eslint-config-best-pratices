@@ -35,6 +35,27 @@ const { next } = require("@ngvihoa/eslint-config-best-practices")
 module.exports = next
 ```
 
+If your project uses `eslint.config.mjs`:
+
+```js
+import { defineConfig, globalIgnores } from "eslint/config"
+import config from "@ngvihoa/eslint-config-best-practices"
+
+const eslintConfig = defineConfig([
+  globalIgnores([
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+  ]),
+  ...config.next,
+])
+
+export default eslintConfig
+```
+
+Do not combine this preset with `eslint-config-next/core-web-vitals` or `eslint-config-next/typescript` in the same flat config. The `next` preset already includes React, TypeScript, and official Next.js rules; combining both configs can make ESLint report duplicate plugins such as `jsx-a11y`. Use `globalIgnores` for app-specific ignore patterns instead.
+
 ## Relationship With Other Presets
 
 ```txt

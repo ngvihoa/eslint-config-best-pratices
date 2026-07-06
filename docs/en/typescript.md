@@ -36,6 +36,7 @@ The TypeScript preset. It extends `base`, enables type-aware linting through `ty
 - `@typescript-eslint/no-explicit-any`: warns on `any`; it stays at `warn` so migrations and difficult interop are not blocked.
 - `no-use-before-define`: disabled because the core rule does not fully understand TypeScript syntax.
 - `@typescript-eslint/no-use-before-define`: TypeScript-aware replacement; disallows classes, variables, and types before declaration while allowing function declarations.
+- `semi`: disallows semicolons at the end of statements in TypeScript/TSX files; auto-fixable with `eslint --fix` or fix-on-save.
 
 ## Unused Variables
 

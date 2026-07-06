@@ -36,6 +36,7 @@ Preset cho TypeScript. File này mở rộng `base`, dùng `typescript-eslint` v
 - `@typescript-eslint/no-explicit-any`: cảnh báo khi dùng `any`; vẫn để mức `warn` để không chặn migration hoặc interop khó.
 - `no-use-before-define`: tắt core rule vì không hiểu TypeScript syntax đầy đủ.
 - `@typescript-eslint/no-use-before-define`: dùng bản TypeScript-aware; không cho class, variable, type dùng trước khai báo, nhưng cho phép function declaration.
+- `semi`: không dùng dấu `;` ở cuối statement trong file TypeScript/TSX; có thể tự sửa bằng `eslint --fix` hoặc fix-on-save.
 
 ## Unused Variables
 
