@@ -1,6 +1,6 @@
 {
   "name": "@ngvihoa/eslint-config-best-practices",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Reusable ESLint flat config presets for JavaScript, TypeScript, React, Next.js, and Node projects.",
   "license": "MIT",
   "type": "commonjs",
