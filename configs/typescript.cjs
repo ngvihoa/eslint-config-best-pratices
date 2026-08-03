@@ -1,4 +1,5 @@
 const tseslint = require("typescript-eslint")
+
 const base = require("./base.cjs")
 
 module.exports = [

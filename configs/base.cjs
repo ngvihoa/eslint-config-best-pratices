@@ -1,7 +1,7 @@
 const js = require("@eslint/js")
-const globals = require("globals")
 const importX = require("eslint-plugin-import-x")
 const unusedImports = require("eslint-plugin-unused-imports")
+const globals = require("globals")
 
 module.exports = [
   {
@@ -18,7 +18,7 @@ module.exports = [
   },
   js.configs.recommended,
   {
-    files: ["**/*.{js,mjs,cjs,jsx}"],
+    files: ["**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}"],
     plugins: {
       "import-x": importX,
       "unused-imports": unusedImports,
@@ -39,6 +39,38 @@ module.exports = [
       "import-x/first": "error",
       "import-x/newline-after-import": "error",
       "import-x/no-duplicates": "error",
+      "import-x/order": [
+        "error",
+        {
+          groups: [
+            "builtin",
+            "external",
+            "internal",
+            "type",
+            "parent",
+            "sibling",
+            "index",
+            "object",
+            "unknown",
+          ],
+          pathGroups: [
+            { pattern: "@/**", group: "internal", position: "before" },
+            { pattern: "~/**", group: "internal", position: "before" },
+            {
+              pattern: "**/*.{css,scss,sass,less}",
+              group: "unknown",
+              position: "after",
+            },
+          ],
+          pathGroupsExcludedImportTypes: ["builtin"],
+          "newlines-between": "always",
+          warnOnUnassignedImports: true,
+          alphabetize: {
+            order: "asc",
+            caseInsensitive: true,
+          },
+        },
+      ],
       "no-console": ["warn", { allow: ["warn", "error"] }],
       "no-debugger": "error",
       "no-else-return": ["error", { allowElseIf: false }],
@@ -57,6 +89,13 @@ module.exports = [
       "prefer-const": ["error", { destructuring: "all" }],
       "prefer-template": "error",
       semi: ["error", "never"],
+      "sort-imports": [
+        "error",
+        {
+          ignoreDeclarationSort: true,
+          ignoreMemberSort: false,
+        },
+      ],
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": [
         "warn",

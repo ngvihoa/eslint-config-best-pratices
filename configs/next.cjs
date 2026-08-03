@@ -1,4 +1,5 @@
 const nextPlugin = require("@next/eslint-plugin-next")
+
 const react = require("./react.cjs")
 
 module.exports = [

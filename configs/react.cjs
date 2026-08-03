@@ -1,7 +1,8 @@
-const globals = require("globals")
 const jsxA11y = require("eslint-plugin-jsx-a11y")
 const react = require("eslint-plugin-react")
 const reactHooks = require("eslint-plugin-react-hooks")
+const globals = require("globals")
+
 const typescript = require("./typescript.cjs")
 
 module.exports = [

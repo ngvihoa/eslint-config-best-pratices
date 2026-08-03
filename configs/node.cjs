@@ -1,4 +1,5 @@
 const globals = require("globals")
+
 const base = require("./base.cjs")
 
 module.exports = [

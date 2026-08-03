@@ -13,55 +13,55 @@ npm install --save-dev eslint @ngvihoa/eslint-config-best-practices
 Create `eslint.config.cjs` in your project:
 
 ```js
-const { base } = require("@ngvihoa/eslint-config-best-practices");
+const { base } = require("@ngvihoa/eslint-config-best-practices")
 
-module.exports = base;
+module.exports = base
 ```
 
 For Node projects:
 
 ```js
-const { node } = require("@ngvihoa/eslint-config-best-practices");
+const { node } = require("@ngvihoa/eslint-config-best-practices")
 
-module.exports = node;
+module.exports = node
 ```
 
 For TypeScript projects:
 
 ```js
-const { typescript } = require("@ngvihoa/eslint-config-best-practices");
+const { typescript } = require("@ngvihoa/eslint-config-best-practices")
 
-module.exports = typescript;
+module.exports = typescript
 ```
 
 For React + TypeScript projects:
 
 ```js
-const { react } = require("@ngvihoa/eslint-config-best-practices");
+const { react } = require("@ngvihoa/eslint-config-best-practices")
 
-module.exports = react;
+module.exports = react
 ```
 
 For Next.js projects:
 
 ```js
-const { next } = require("@ngvihoa/eslint-config-best-practices");
+const { next } = require("@ngvihoa/eslint-config-best-practices")
 
-module.exports = next;
+module.exports = next
 ```
 
 If your Next.js project uses `eslint.config.mjs`:
 
 ```js
-import { defineConfig, globalIgnores } from "eslint/config";
-import config from "@ngvihoa/eslint-config-best-practices";
+import { defineConfig, globalIgnores } from "eslint/config"
+import config from "@ngvihoa/eslint-config-best-practices"
 
 const eslintConfig = defineConfig([
   globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
   ...config.next,
-]);
+])
 
-export default eslintConfig;
+export default eslintConfig
 ```
 
 Do not combine this preset with `eslint-config-next/core-web-vitals` or `eslint-config-next/typescript` in the same flat config. The `next` preset already includes React, TypeScript, and official Next.js rules, so combining both configs can redefine plugins such as `jsx-a11y`. Use `globalIgnores` for app-specific ignore patterns instead.
@@ -90,7 +90,7 @@ Then add this to your project-level `.vscode/settings.json`:
 }
 ```
 
-This lets ESLint fix auto-fixable rules whenever you save a file, such as removing semicolons from `semi`, cleaning unused imports from `unused-imports/no-unused-imports`, and applying other safe ESLint fixes.
+This lets ESLint fix auto-fixable rules whenever you save a file, such as sorting imports, removing semicolons from `semi`, cleaning unused imports from `unused-imports/no-unused-imports`, and applying other safe ESLint fixes.
 
 If you also use Prettier on save, make sure Prettier does not add semicolons back after ESLint removes them. Add a project-level `.prettierrc`:
 
@@ -131,10 +131,6 @@ Each `.cjs` file has Vietnamese and English documentation explaining its purpose
 ## Type-Aware TypeScript
 
 The TypeScript preset uses `projectService: true`, so it expects a `tsconfig.json` in the consuming project. If you lint generated files or config files outside your TypeScript project, add an override in that project's `eslint.config.cjs`.
-
-## Dependency Versions
-
-This package avoids caret ranges such as `^1.2.3` for direct dependencies. Pinning versions keeps lint behavior predictable across installs; update dependency versions intentionally when you want new rules or changed defaults.
 
 ## Local Development
 

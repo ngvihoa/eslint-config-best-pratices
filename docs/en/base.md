@@ -21,6 +21,8 @@ The base JavaScript preset. Use this as the starting point for most JS projects 
 - `import-x/first`: keeps imports before other statements for easier scanning.
 - `import-x/newline-after-import`: requires a blank line after imports to separate dependencies from implementation.
 - `import-x/no-duplicates`: prevents duplicate imports from the same module.
+- `import-x/order`: auto-sorts import declarations by built-in, external package, internal alias (`@/`, `~/`), type, parent, sibling/index, and side-effect groups; it separates groups with blank lines and alphabetizes each group. Misplaced side-effect imports are reported but not moved automatically to avoid changing execution order.
+- `sort-imports`: auto-sorts named imports inside `{}` alphabetically, while `import-x/order` owns declaration ordering.
 
 ## Unused Rules
 
