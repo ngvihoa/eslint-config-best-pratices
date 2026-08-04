@@ -3,6 +3,8 @@ const importX = require("eslint-plugin-import-x")
 const unusedImports = require("eslint-plugin-unused-imports")
 const globals = require("globals")
 
+const bestPractices = require("../plugin.cjs")
+
 module.exports = [
   {
     ignores: [
@@ -20,6 +22,7 @@ module.exports = [
   {
     files: ["**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx}"],
     plugins: {
+      "best-practices": bestPractices,
       "import-x": importX,
       "unused-imports": unusedImports,
     },
@@ -43,10 +46,10 @@ module.exports = [
         "error",
         {
           groups: [
+            "type",
             "builtin",
             "external",
             "internal",
-            "type",
             "parent",
             "sibling",
             "index",
@@ -65,10 +68,6 @@ module.exports = [
           pathGroupsExcludedImportTypes: ["builtin"],
           "newlines-between": "always",
           warnOnUnassignedImports: true,
-          alphabetize: {
-            order: "asc",
-            caseInsensitive: true,
-          },
         },
       ],
       "no-console": ["warn", { allow: ["warn", "error"] }],
@@ -89,13 +88,7 @@ module.exports = [
       "prefer-const": ["error", { destructuring: "all" }],
       "prefer-template": "error",
       semi: ["error", "never"],
-      "sort-imports": [
-        "error",
-        {
-          ignoreDeclarationSort: true,
-          ignoreMemberSort: false,
-        },
-      ],
+      "best-practices/sort-imports": "error",
       "unused-imports/no-unused-imports": "error",
       "unused-imports/no-unused-vars": [
         "warn",

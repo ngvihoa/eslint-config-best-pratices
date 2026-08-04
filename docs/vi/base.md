@@ -21,8 +21,8 @@ Preset nền cho JavaScript browser-oriented. File này nên là điểm bắt �
 - `import-x/first`: import phải nằm trước các statement khác để file dễ scan.
 - `import-x/newline-after-import`: yêu cầu một dòng trống sau nhóm import để tách dependency khỏi logic.
 - `import-x/no-duplicates`: không cho import trùng từ cùng một module.
-- `import-x/order`: tự sắp xếp các dòng import theo nhóm built-in, package bên ngoài, alias nội bộ (`@/`, `~/`), type, parent, sibling/index và side-effect; thêm dòng trống giữa nhóm và xếp alphabet trong từng nhóm. Side-effect import đặt sai vị trí sẽ bị báo lỗi nhưng không tự di chuyển để tránh thay đổi thứ tự thực thi.
-- `sort-imports`: tự sắp xếp các named import trong `{}` theo alphabet, còn thứ tự các dòng import do `import-x/order` quản lý.
+- `import-x/order`: đảm bảo thứ tự nhóm type, built-in, package bên ngoài, alias nội bộ (`@/`, `~/`), parent và sibling/index, đồng thời thêm dòng trống giữa các nhóm. Side-effect import đặt sai vị trí cũng bị báo lỗi.
+- `best-practices/sort-imports`: custom rule có auto-fix, phối hợp với `import-x/order` để sort import theo nhóm rồi theo dạng named một dòng, named nhiều dòng và default/side-effect. Specifier trong named import nhiều dòng được xếp theo độ dài giảm dần.
 
 ## Unused Rules
 

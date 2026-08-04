@@ -78,8 +78,15 @@ Then add this to your project-level `.vscode/settings.json`:
 
 ```json
 {
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always"
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "[javascript][javascriptreact][typescript][typescriptreact]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "always"
+    }
   },
   "eslint.validate": [
     "javascript",
@@ -90,7 +97,9 @@ Then add this to your project-level `.vscode/settings.json`:
 }
 ```
 
-This lets ESLint fix auto-fixable rules whenever you save a file, such as sorting imports, removing semicolons from `semi`, cleaning unused imports from `unused-imports/no-unused-imports`, and applying other safe ESLint fixes.
+This lets ESLint fix auto-fixable rules whenever you save a file, such as sorting imports with `best-practices/sort-imports`, removing semicolons from `semi`, cleaning unused imports from `unused-imports/no-unused-imports`, and applying other safe ESLint fixes.
+
+If you are updating this package, you should run `ESLint: Restart ESLint Server` from the VS Code Command Palette. Use `View > Output > ESLint` to diagnose extension or working-directory errors.
 
 If you also use Prettier on save, make sure Prettier does not add semicolons back after ESLint removes them. Add a project-level `.prettierrc`:
 
@@ -106,9 +115,67 @@ If you prefer to run fixes manually, use:
 npx eslint . --fix
 ```
 
+Running ESLint without `--fix` only reports problems:
+
+```sh
+npx eslint .
+```
+
+## Import Sorting
+
+The `base`, `typescript`, `react`, and `next` presets enable the auto-fixable `best-practices/sort-imports` rule. It works with `import-x/order` to apply this group order:
+
+1. Type imports
+2. Node built-ins
+3. External packages
+4. Internal aliases such as `@/` and `~/`
+5. Parent imports
+6. Sibling and index imports, including stylesheet side effects
+
+Within a group, imports are arranged by single-line named, multiline named, and default/side-effect form. Named specifiers in multiline imports are sorted by descending length.
+
+Save a file with imports scattered like this:
+
+```tsx
+import "./product.css"
+import ProductDetails from "./ProductDetails"
+import Image from "next/image"
+import { formatCurrency } from "../lib/currency"
+import {
+  Price,
+  AddToWishlistButton,
+  ProductGallery,
+} from "@/features/catalog"
+import { readFile } from "node:fs/promises"
+import type { ProductPageProps } from "@/features/catalog/types"
+import { notFound } from "next/navigation"
+```
+
+ESLint rewrites the entire import section into a predictable dependency map:
+
+```tsx
+import type { ProductPageProps } from "@/features/catalog/types"
+
+import { readFile } from "node:fs/promises"
+
+import { notFound } from "next/navigation"
+import Image from "next/image"
+
+import {
+  AddToWishlistButton,
+  ProductGallery,
+  Price,
+} from "@/features/catalog"
+
+import { formatCurrency } from "../lib/currency"
+
+import ProductDetails from "./ProductDetails"
+import "./product.css"
+```
+
 ## Presets
 
-- `base`: JavaScript recommended rules, import hygiene, unused import cleanup, and general code-quality rules.
+- `base`: JavaScript recommended rules, custom import sorting, unused import cleanup, and general code-quality rules.
 - `node`: `base` plus Node globals and console-friendly defaults.
 - `typescript`: `base` plus `typescript-eslint` recommended and type-aware rules.
 - `react`: `typescript` plus React, React Hooks, JSX runtime, and accessibility rules.
@@ -131,11 +198,3 @@ Each `.cjs` file has Vietnamese and English documentation explaining its purpose
 ## Type-Aware TypeScript
 
 The TypeScript preset uses `projectService: true`, so it expects a `tsconfig.json` in the consuming project. If you lint generated files or config files outside your TypeScript project, add an override in that project's `eslint.config.cjs`.
-
-## Local Development
-
-```sh
-npm install
-npm run lint
-npm run pack:check
-```
