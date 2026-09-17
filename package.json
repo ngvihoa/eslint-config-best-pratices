@@ -3,6 +3,17 @@
   "version": "0.1.2",
   "description": "Reusable ESLint flat config presets for JavaScript, TypeScript, React, Next.js, and Node projects.",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngvihoa/eslint-config-best-pratices.git"
+  },
+  "homepage": "https://github.com/ngvihoa/eslint-config-best-pratices#readme",
+  "bugs": {
+    "url": "https://github.com/ngvihoa/eslint-config-best-pratices/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "commonjs",
   "main": "index.cjs",
   "exports": {

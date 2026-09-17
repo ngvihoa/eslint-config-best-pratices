@@ -198,3 +198,23 @@ Each `.cjs` file has Vietnamese and English documentation explaining its purpose
 ## Type-Aware TypeScript
 
 The TypeScript preset uses `projectService: true`, so it expects a `tsconfig.json` in the consuming project. If you lint generated files or config files outside your TypeScript project, add an override in that project's `eslint.config.cjs`.
+
+## Release
+
+Before publishing a new version:
+
+```sh
+npm test
+npm run lint
+npm run pack:check
+```
+
+Review the generated package contents, update `CHANGELOG.md`, and commit the source changes. Then bump the version, push the commit and tag, and publish:
+
+```sh
+npm version patch
+git push origin main --follow-tags
+npm publish
+```
+
+Use `npm version minor` or `npm version major` when the release contains new features or breaking changes. The package is configured as public in `package.json`; run `npm login` first if the npm session is not authenticated.
