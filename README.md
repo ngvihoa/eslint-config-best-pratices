@@ -212,9 +212,8 @@ npm run pack:check
 Review the generated package contents, update `CHANGELOG.md`, and commit the source changes. Then bump the version, push the commit and tag, and publish:
 
 ```sh
-npm version patch
-git push origin main --follow-tags
+npm run release:github -- patch
 npm publish
 ```
 
-Use `npm version minor` or `npm version major` when the release contains new features or breaking changes. The package is configured as public in `package.json`; run `npm login` first if the npm session is not authenticated.
+Use `npm run release:github -- minor` or `npm run release:github -- major` when the release contains new features or breaking changes. The script runs the test, lint, and package checks, creates the npm version commit and tag, pushes them to GitHub, and creates a GitHub Release with generated notes. The package is configured as public in `package.json`; run `npm login` first if the npm session is not authenticated.

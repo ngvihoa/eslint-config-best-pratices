@@ -37,6 +37,7 @@
   "scripts": {
     "lint": "eslint .",
     "pack:check": "npm pack --dry-run",
+    "release:github": "node scripts/release.cjs",
     "test": "node --test tests/*.test.cjs"
   },
   "keywords": [
